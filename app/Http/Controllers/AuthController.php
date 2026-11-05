@@ -3,13 +3,23 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Validation\Rules\Password;
+use Illuminate\Validation\ValidationException;
 class AuthController extends Controller {
  public function loginForm(){return view('auth.login');}
  public function registerForm(){return view('auth.register');}
  public function login(Request $r){
   $data=$r->validate(['email'=>'required|email','password'=>'required|string']);
-  if(!Auth::attempt($data))return back()->withErrors(['email'=>'Credenciais inválidas.'])->onlyInput('email');
+  $key='login:'.mb_strtolower($data['email']).'|'.$r->ip();
+  if(RateLimiter::tooManyAttempts($key,5)){
+   throw ValidationException::withMessages(['email'=>'Demasiadas tentativas. Tenta novamente dentro de '.RateLimiter::availableIn($key).' segundos.']);
+  }
+  if(!Auth::attempt($data)){
+   RateLimiter::hit($key,60);
+   return back()->withErrors(['email'=>'Credenciais inválidas.'])->onlyInput('email');
+  }
+  RateLimiter::clear($key);
   $r->session()->regenerate();
   return redirect()->intended(route('home'));
  }
