@@ -1,0 +1,23 @@
+name: Testes Laravel
+on:
+  push:
+  pull_request:
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mbstring, pdo_sqlite, sqlite3
+      - name: Instalar Laravel base
+        run: |
+          cd ..
+          composer create-project laravel/laravel nova-app '^12.0' --no-interaction
+          cp -R novalens-store/app novalens-store/bootstrap novalens-store/database novalens-store/resources novalens-store/routes novalens-store/tests nova-app/
+          cd nova-app
+          php artisan key:generate
+          touch database/database.sqlite
+          php artisan migrate --seed --force
+          php artisan test
