@@ -46,7 +46,7 @@ html{scroll-behavior:smooth}body{font-family:'DM Sans',sans-serif}h1,h2,h3,h4{fo
     </nav>
     <div class="ml-auto flex items-center gap-2 sm:gap-4">
       @auth
-      <a href="{{route('orders.index')}}" class="hidden md:inline text-sm font-bold hover:text-flame">Encomendas</a>
+      <a href="{{route('orders.index')}}" class="hidden md:inline text-sm font-bold hover:text-flame">Encomendas</a><a href="{{route('password.edit')}}" class="hidden xl:inline text-sm font-bold hover:text-flame">Segurança</a>
       @if(auth()->user()->is_admin)<a href="{{route('admin.produtos.index')}}" class="hidden md:inline text-sm font-bold hover:text-flame">Admin</a>@endif
       @else
       <a href="{{route('login')}}" class="hidden sm:inline text-sm font-bold hover:text-flame">Entrar</a>
@@ -59,7 +59,7 @@ html{scroll-behavior:smooth}body{font-family:'DM Sans',sans-serif}h1,h2,h3,h4{fo
         <summary class="cursor-pointer list-none rounded-xl border border-slate-200 px-3 py-2.5 text-sm font-bold">Menu</summary>
         <nav class="absolute right-0 top-12 w-52 bg-white rounded-2xl border shadow-soft p-4 flex flex-col gap-4 text-sm font-semibold z-50">
           <a href="{{route('home')}}">Loja</a><a href="{{route('home',['categoria'=>'capas'])}}">Capas</a><a href="{{route('home',['categoria'=>'acessorios'])}}">Acessórios</a><a href="{{route('home',['categoria'=>'camaras'])}}">Câmaras</a><a href="{{route('home',['categoria'=>'audio'])}}">Áudio</a><a href="{{route('home',['categoria'=>'gaming'])}}">Gaming</a><a href="{{route('repairs.index')}}">Reparações</a>
-          @auth<a href="{{route('orders.index')}}">Encomendas</a>@if(auth()->user()->is_admin)<a href="{{route('admin.produtos.index')}}">Admin</a>@endif
+          @auth<a href="{{route('orders.index')}}">Encomendas</a><a href="{{route('password.edit')}}">Segurança da conta</a>@if(auth()->user()->is_admin)<a href="{{route('admin.produtos.index')}}">Admin</a>@endif
           <form method="post" action="{{route('logout')}}">@csrf<button class="font-bold text-red-600">Sair</button></form>
           @else<a href="{{route('login')}}">Entrar</a><a href="{{route('register')}}">Criar conta</a>@endauth
         </nav>
