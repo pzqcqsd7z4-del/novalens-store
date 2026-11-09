@@ -1,7 +1,9 @@
 <?php
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\{StoreController,AuthController,CartController,CheckoutController,AdminProductController,AdminOrderController};
+use App\Http\Controllers\{StoreController,AuthController,CartController,CheckoutController,AdminProductController,AdminOrderController,RepairController,AdminRepairController};
 Route::get('/',[StoreController::class,'index'])->name('home');
+Route::get('/reparacoes',[RepairController::class,'index'])->name('repairs.index');
+Route::post('/reparacoes',[RepairController::class,'store'])->middleware('throttle:5,1')->name('repairs.store');
 Route::get('/produtos/{product}',[StoreController::class,'show'])->name('products.show');
 Route::get('/entrar',[AuthController::class,'loginForm'])->middleware('guest')->name('login');
 Route::post('/entrar',[AuthController::class,'login'])->middleware('guest')->name('login.store');
@@ -18,6 +20,8 @@ Route::middleware('auth')->group(function(){
   Route::get('/encomendas',[CheckoutController::class,'orders'])->name('orders.index');
 });
 Route::middleware(['auth','admin'])->prefix('admin')->name('admin.')->group(function(){
+  Route::get('reparacoes',[AdminRepairController::class,'index'])->name('repairs.index');
+  Route::patch('reparacoes/{repair}',[AdminRepairController::class,'update'])->name('repairs.update');
   Route::resource('produtos',AdminProductController::class)->except(['show'])->parameters(['produtos'=>'product']);
   Route::get('encomendas',[AdminOrderController::class,'index'])->name('orders.index');
   Route::patch('encomendas/{order}',[AdminOrderController::class,'update'])->name('orders.update');
