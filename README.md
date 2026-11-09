@@ -62,3 +62,11 @@ Ver [PLANO-15-AULAS.md](PLANO-15-AULAS.md).
 **Projeto de demonstração.** Não processa pagamentos reais. Os produtos, preços e imagens são exemplos fictícios. Não publiques ficheiros `.env` ou credenciais e não coloques a loja em produção sem rever segurança, privacidade, configurações HTTPS, sistema de pagamentos e obrigações legais.
 
 **Nota técnica:** este repositório contém o código específico da loja, não o código-base completo do Laravel. O instalador obtém esse código-base através do Composer.
+
+## Corrigir avisos Deprecated no PHP 8.5
+Se aparecer `PDO::MYSQL_ATTR_SSL_CA is deprecated`, executa na pasta `novalens-store`:
+```powershell
+git pull
+powershell -ExecutionPolicy Bypass -File .\CORRIGIR-PHP85.ps1
+```
+O script cria uma cópia de segurança de `novalens-laravel/config/database.php`, substitui a constante por uma expressão compatível com PHP 8.2–8.5 e limpa a cache. Reinicia o servidor Laravel depois da correção.
