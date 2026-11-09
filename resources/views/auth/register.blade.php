@@ -8,8 +8,8 @@
   <form method="post" action="{{route('register.store')}}" class="space-y-4">@csrf
   <label class="block text-sm font-bold" for="name">Nome completo<input id="name" class="field mt-2" name="name" required maxlength="255" autocomplete="name" value="{{old('name')}}" placeholder="O teu nome"></label>
   <label class="block text-sm font-bold" for="email">Email<input id="email" class="field mt-2" type="email" name="email" required autocomplete="email" value="{{old('email')}}" placeholder="nome@exemplo.pt"></label>
-  <label class="block text-sm font-bold" for="password">Palavra-passe <span class="font-normal text-muted">(mínimo 8 caracteres)</span><input id="password" class="field mt-2" type="password" name="password" required minlength="8" autocomplete="new-password" placeholder="Criar palavra-passe"></label>
-  <label class="block text-sm font-bold" for="password_confirmation">Confirmar palavra-passe<input id="password_confirmation" class="field mt-2" type="password" name="password_confirmation" required minlength="8" autocomplete="new-password" placeholder="Repetir palavra-passe"></label>
+  <label class="block text-sm font-bold" for="password">Palavra-passe <span class="font-normal text-muted">(mínimo 10 caracteres, maiúsculas, minúsculas, números e símbolos)</span><input id="password" class="field mt-2" type="password" name="password" required minlength="10" autocomplete="new-password" placeholder="Criar palavra-passe"></label>
+  <label class="block text-sm font-bold" for="password_confirmation">Confirmar palavra-passe<input id="password_confirmation" class="field mt-2" type="password" name="password_confirmation" required minlength="10" autocomplete="new-password" placeholder="Repetir palavra-passe"></label>
   <button type="submit" class="btn-dark w-full !mt-7">Criar conta →</button></form>
   <p class="text-xs text-muted text-center mt-6">Conta criada apenas para esta demonstração escolar.</p>
  </div>
