@@ -7,7 +7,7 @@ class StoreTest extends TestCase {
  use RefreshDatabase;
  public function test_homepage_loads():void {$this->get('/')->assertOk();}
  public function test_customer_registers_without_admin_rights():void {
-  $this->post('/registar',['name'=>'Cliente','email'=>'cliente@example.com','password'=>'password123','password_confirmation'=>'password123'])->assertRedirect('/');
+  $this->post('/registar',['name'=>'Cliente','email'=>'cliente@example.com','password'=>'Password123!','password_confirmation'=>'Password123!'])->assertRedirect('/');
   $this->assertAuthenticated();$this->assertFalse((bool)User::firstOrFail()->is_admin);
  }
  public function test_customer_cannot_access_admin():void {
