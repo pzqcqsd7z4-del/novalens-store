@@ -4,10 +4,12 @@
 Loja online de tecnologia e fotografia com estética contemporânea, organizada e mobile-first.
 
 ## Identidade
-- **Preto grafite:** `#101519` — cabeçalho, contraste e botões principais.
-- **Verde-menta:** `#B8F8D2` — destaques, call-to-action e elementos de marca.
-- **Verde profundo:** `#176646` — links, categorias e estados positivos.
-- **Fundo:** `#F7F8F8` — superfícies e separação visual.
+- **Preto principal:** `#111111` — cabeçalho e botões.
+- **Vermelho:** `#C1121F` — marca e destaques.
+- **Laranja:** `#F97316` — botões de ação e chamadas de atenção.
+- **Cinza claro:** `#F3F4F6` — fundos.
+- **Cinza escuro:** `#1F2937` — contraste.
+- **Cinza texto:** `#6B7280` — informação secundária.
 - **Títulos:** Manrope, pesos fortes.
 - **Texto:** DM Sans.
 
@@ -33,3 +35,6 @@ Os ficheiros em `public/images/` são ilustrações SVG locais de exemplo. Podem
 
 ## Executar
 Segue as instruções do [README.md](README.md). Em instalações existentes, faz `git pull` no repositório de código e copia os ficheiros alterados para o projeto Laravel efetivo (`novalens-laravel`). O projeto não está publicado como site online: o GitHub hospeda apenas o código.
+
+## Atualização cromática
+As páginas da loja usam preto, vermelho, cinza e laranja como identidade principal.
