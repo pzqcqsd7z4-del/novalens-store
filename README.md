@@ -70,3 +70,26 @@ git pull
 powershell -ExecutionPolicy Bypass -File .\CORRIGIR-PHP85.ps1
 ```
 O script cria uma cópia de segurança de `novalens-laravel/config/database.php`, substitui a constante por uma expressão compatível com PHP 8.2–8.5 e limpa a cache. Reinicia o servidor Laravel depois da correção.
+
+## Novidades: catálogo completo e reparações
+O catálogo inclui **32 produtos de demonstração** em 8 categorias: capas, acessórios, câmaras, áudio, gaming, carregamento, armazenamento e computadores. As imagens são ilustrações locais e os preços são fictícios.
+
+A secção `/reparacoes` permite registar pedidos demonstrativos de orçamento para troca de ecrã, bateria, problemas de carregamento e diagnóstico. A área administrativa `/admin/reparacoes` permite ver pedidos e atualizar os estados. Não há reparações ou contactos reais automáticos.
+
+## Segurança das contas
+- Registo com password mínima de 10 caracteres, maiúsculas, minúsculas, números e símbolos, incluindo confirmação.
+- Passwords guardadas com hashing do Laravel, não em texto simples.
+- Limites de pedidos de login e registo e bloqueio temporário após tentativas falhadas.
+- Renovação da sessão ao iniciar sessão; invalidação ao sair.
+- Proteção CSRF em formulários e controlo de acesso ao painel de administração.
+- Alteração de palavra-passe na página `/conta/seguranca`, exigindo a atual.
+- É um protótipo: ainda não inclui recuperação de palavra-passe por email, verificação de email ou autenticação multifator.
+
+## Atualizar a instalação existente (Windows)
+Na pasta `novalens-store`, executa:
+```powershell
+git pull
+powershell -ExecutionPolicy Bypass -File .\ATUALIZAR-LOJA.ps1
+```
+Este script copia os ficheiros de aplicação e executa `php artisan migrate --force`, `php artisan db:seed --force` e `php artisan optimize:clear` na pasta `novalens-laravel`. Não apaga o ficheiro `.env` nem a base de dados SQLite existente. Antes de atualizar instalações com dados importantes, faz uma cópia de segurança da pasta `database` e do ficheiro `.env`.
+Reinicia `php artisan serve` depois da atualização.
