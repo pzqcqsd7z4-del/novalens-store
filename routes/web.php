@@ -6,15 +6,17 @@ Route::get('/reparacoes',[RepairController::class,'index'])->name('repairs.index
 Route::post('/reparacoes',[RepairController::class,'store'])->middleware('throttle:5,1')->name('repairs.store');
 Route::get('/produtos/{product}',[StoreController::class,'show'])->name('products.show');
 Route::get('/entrar',[AuthController::class,'loginForm'])->middleware('guest')->name('login');
-Route::post('/entrar',[AuthController::class,'login'])->middleware('guest')->name('login.store');
+Route::post('/entrar',[AuthController::class,'login'])->middleware(['guest','throttle:12,1'])->name('login.store');
 Route::get('/registar',[AuthController::class,'registerForm'])->middleware('guest')->name('register');
-Route::post('/registar',[AuthController::class,'register'])->middleware('guest')->name('register.store');
+Route::post('/registar',[AuthController::class,'register'])->middleware(['guest','throttle:4,10'])->name('register.store');
 Route::post('/sair',[AuthController::class,'logout'])->middleware('auth')->name('logout');
 Route::get('/carrinho',[CartController::class,'index'])->name('cart.index');
 Route::post('/carrinho/{product}',[CartController::class,'add'])->name('cart.add');
 Route::patch('/carrinho/{product}',[CartController::class,'update'])->name('cart.update');
 Route::delete('/carrinho/{product}',[CartController::class,'remove'])->name('cart.remove');
 Route::middleware('auth')->group(function(){
+  Route::get('/conta/seguranca',[AuthController::class,'passwordForm'])->name('password.edit');
+  Route::put('/conta/seguranca',[AuthController::class,'changePassword'])->middleware('throttle:5,10')->name('password.update');
   Route::get('/checkout',[CheckoutController::class,'create'])->name('checkout.create');
   Route::post('/checkout',[CheckoutController::class,'store'])->name('checkout.store');
   Route::get('/encomendas',[CheckoutController::class,'orders'])->name('orders.index');
