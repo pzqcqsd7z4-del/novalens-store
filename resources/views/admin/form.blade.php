@@ -1,8 +1,8 @@
 @extends('layouts.app')
 @section('title',($product->exists?'Editar':'Novo').' produto — NovaLens Admin')
 @section('content')
-<nav class="text-sm text-muted mb-7"><a href="{{route('admin.produtos.index')}}" class="hover:text-forest">Administração</a><span class="mx-2">/</span><span class="text-ink font-bold">{{$product->exists?'Editar produto':'Novo produto'}}</span></nav>
-<div class="max-w-3xl"><p class="text-xs uppercase tracking-[.2em] font-extrabold text-forest mb-2">Gestão de catálogo</p><h1 class="font-display text-4xl md:text-5xl tracking-[-.05em] font-extrabold">{{$product->exists?'Editar produto':'Adicionar produto'}}<span class="text-forest">.</span></h1><p class="text-muted mt-3 mb-8">Preenche os detalhes para manteres a loja organizada.</p>
+<nav class="text-sm text-muted mb-7"><a href="{{route('admin.produtos.index')}}" class="hover:text-flame">Administração</a><span class="mx-2">/</span><span class="text-ink font-bold">{{$product->exists?'Editar produto':'Novo produto'}}</span></nav>
+<div class="max-w-3xl"><p class="text-xs uppercase tracking-[.2em] font-extrabold text-danger mb-2">Gestão de catálogo</p><h1 class="font-display text-4xl md:text-5xl tracking-[-.05em] font-extrabold">{{$product->exists?'Editar produto':'Adicionar produto'}}<span class="text-danger">.</span></h1><p class="text-muted mt-3 mb-8">Preenche os detalhes para manteres a loja organizada.</p>
 <form method="post" action="{{$product->exists?route('admin.produtos.update',$product):route('admin.produtos.store')}}" class="bg-white border border-slate-100 rounded-[26px] p-6 sm:p-9 space-y-6">@csrf @if($product->exists) @method('PUT') @endif
 <div class="grid sm:grid-cols-2 gap-5">
 <label class="block text-sm font-bold sm:col-span-2" for="name">Nome do produto<input id="name" name="name" required maxlength="255" value="{{old('name',$product->name)}}" class="field mt-2" placeholder="Ex.: Câmara compacta digital"></label>
