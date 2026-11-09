@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title','NovaLens Store — Capas, acessórios e câmaras')
+@section('title','NovaLens Store — Tecnologia, gaming, áudio e reparações')
 @section('content')
 <section class="relative rounded-[32px] overflow-hidden bg-ink text-white min-h-[480px] flex items-center">
   <div class="absolute inset-0 pointer-events-none overflow-hidden"><div class="absolute w-[540px] h-[540px] rounded-full bg-[#671d20] right-[-140px] top-[-190px] blur-2xl opacity-70"></div><div class="absolute w-[320px] h-[320px] rounded-full bg-[#f97316] right-16 bottom-[-175px] blur-2xl opacity-70"></div></div>
@@ -7,7 +7,7 @@
    <div class="max-w-xl">
     <span class="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-4 py-2 text-[11px] uppercase tracking-[.2em] font-bold"><span class="h-2 w-2 rounded-full bg-flame"></span> O teu mundo, mais criativo</span>
     <h1 class="font-display font-extrabold leading-[1.07] tracking-[-.055em] text-5xl sm:text-6xl xl:text-[70px] mt-7">Capta mais.<br><span class="text-flame">Vive melhor.</span></h1>
-    <p class="mt-6 text-slate-300 leading-7 text-base sm:text-lg max-w-md">Capas que protegem, acessórios que ajudam e câmaras para não perder nenhum momento.</p>
+    <p class="mt-6 text-slate-300 leading-7 text-base sm:text-lg max-w-md">Fones, gaming, computadores, acessórios e câmaras. Tecnologia para cada momento — e reparações quando precisas.</p>
     <div class="mt-8 flex flex-wrap items-center gap-4"><a href="#colecao" class="bg-flame text-ink rounded-2xl font-extrabold px-7 py-4 hover:bg-white transition">Explorar produtos <span aria-hidden="true">↗</span></a><span class="text-xs font-semibold text-slate-300">Design. Utilidade. Criatividade.</span></div>
    </div>
    <div class="relative hidden lg:flex justify-center items-center min-h-[380px]">
@@ -29,7 +29,13 @@
  <a href="{{route('home',['categoria'=>'acessorios'])}}#colecao" class="group relative rounded-[26px] bg-[#e7e7ea] p-7 min-h-[220px] overflow-hidden flex flex-col justify-between"><span class="relative z-10 uppercase text-xs font-bold tracking-widest text-slate-700">02 · Praticidade</span><div class="relative z-10"><h3 class="font-display font-extrabold text-2xl">Acessórios</h3><p class="text-sm text-slate-600 mt-2">Tudo funciona melhor</p></div><img src="{{asset('images/acessorios.svg')}}" alt="" class="absolute w-52 h-40 object-cover rounded-2xl top-10 -right-7 rotate-[-12deg] opacity-75 product-image"></a>
  <a href="{{route('home',['categoria'=>'camaras'])}}#colecao" class="group relative rounded-[26px] bg-[#fff0e5] p-7 min-h-[220px] overflow-hidden flex flex-col justify-between"><span class="relative z-10 uppercase text-xs font-bold tracking-widest text-orange-900">03 · Criatividade</span><div class="relative z-10"><h3 class="font-display font-extrabold text-2xl">Câmaras</h3><p class="text-sm text-slate-600 mt-2">O momento é agora</p></div><img src="{{asset('images/camaras.svg')}}" alt="" class="absolute w-52 h-40 object-cover rounded-2xl top-10 -right-7 rotate-[-12deg] opacity-75 product-image"></a>
 </div>
+<div class="grid sm:grid-cols-2 lg:grid-cols-5 gap-3 mt-4">
+@foreach([['audio','Áudio','audio.svg'],['gaming','Gaming','gaming.svg'],['carregamento','Carregamento','carregamento.svg'],['armazenamento','Armazenamento','armazenamento.svg'],['computadores','Computadores','computadores.svg']] as $cat)
+<a href="{{route('home',['categoria'=>$cat[0]])}}#colecao" class="group flex gap-3 items-center bg-white rounded-2xl p-3 border border-slate-100 hover:border-orange-300 transition"><img src="{{asset('images/'.$cat[2])}}" alt="" class="w-14 h-14 rounded-xl object-cover"><span class="font-display font-bold text-sm">{{$cat[1]}} →</span></a>
+@endforeach
+</div>
 </section>
+<section class="bg-ink text-white rounded-[28px] p-7 sm:p-10 flex flex-wrap items-center justify-between gap-6 mb-14"><div><p class="text-flame uppercase text-xs tracking-widest font-extrabold">NovaLens Tech Repair</p><h2 class="font-display text-2xl sm:text-3xl font-extrabold mt-2">Ecrã partido? Nós ajudamos.</h2><p class="text-slate-300 text-sm mt-2">Troca de ecrãs, baterias e diagnóstico. Pedidos de orçamento demonstrativos.</p></div><a href="{{route('repairs.index')}}" class="bg-flame text-ink font-extrabold rounded-xl px-6 py-4 hover:bg-orange-300">Pedir orçamento ↗</a></section>
 <section id="colecao" class="scroll-mt-32">
  <div class="flex flex-wrap items-end justify-between gap-4 mb-6"><div><p class="text-danger uppercase tracking-[.22em] text-xs font-extrabold mb-2">A tua seleção</p><h2 class="font-display text-3xl md:text-4xl font-extrabold tracking-[-.04em]">Os nossos produtos<span class="text-danger">.</span></h2></div><p class="text-sm text-muted">{{$products->total()}} produto(s) encontrados</p></div>
  <form method="get" action="{{route('home')}}#colecao" class="bg-white rounded-[22px] p-4 border border-slate-100 mb-7 flex flex-col md:flex-row gap-3">
