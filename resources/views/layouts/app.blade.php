@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="theme-color" content="#111111">
-<meta name="description" content="NovaLens Store — capas, acessórios e câmaras para o teu dia a dia. Loja demonstrativa.">
+<meta name="description" content="NovaLens Store — loja de tecnologia, gaming, áudio e reparações. Loja demonstrativa.">
 <title>@yield('title', 'NovaLens Store — Tecnologia com estilo')</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -35,11 +35,14 @@ html{scroll-behavior:smooth}body{font-family:'DM Sans',sans-serif}h1,h2,h3,h4{fo
       <span class="w-10 h-10 rounded-2xl bg-ink text-flame flex items-center justify-center text-xl font-extrabold">N.</span>
       <span class="font-display font-extrabold tracking-[-.06em] text-[22px]">nova<span class="text-danger">lens</span><span class="text-[10px] text-muted tracking-normal ml-1 font-semibold">store</span></span>
     </a>
-    <nav class="hidden lg:flex items-center gap-8 mx-auto text-sm font-bold text-slate-600" aria-label="Navegação principal">
+    <nav class="hidden xl:flex items-center gap-5 mx-auto text-sm font-bold text-slate-600" aria-label="Navegação principal">
       <a href="{{route('home')}}" class="hover:text-flame transition">Descobrir</a>
       <a href="{{route('home',['categoria'=>'capas'])}}" class="hover:text-flame transition">Capas</a>
       <a href="{{route('home',['categoria'=>'acessorios'])}}" class="hover:text-flame transition">Acessórios</a>
       <a href="{{route('home',['categoria'=>'camaras'])}}" class="hover:text-flame transition">Câmaras</a>
+      <a href="{{route('home',['categoria'=>'audio'])}}" class="hover:text-flame transition">Áudio</a>
+      <a href="{{route('home',['categoria'=>'gaming'])}}" class="hover:text-flame transition">Gaming</a>
+      <a href="{{route('repairs.index')}}" class="hover:text-danger transition">Reparações</a>
     </nav>
     <div class="ml-auto flex items-center gap-2 sm:gap-4">
       @auth
@@ -52,17 +55,17 @@ html{scroll-behavior:smooth}body{font-family:'DM Sans',sans-serif}h1,h2,h3,h4{fo
         <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3h2l2 12h12l2-9H6"/><circle cx="9" cy="20" r="1"/><circle cx="18" cy="20" r="1"/></svg>
         <span class="text-xs font-extrabold">{{array_sum(session('cart',[]))}}</span>
       </a>
-      <details class="lg:hidden relative">
+      <details class="xl:hidden relative">
         <summary class="cursor-pointer list-none rounded-xl border border-slate-200 px-3 py-2.5 text-sm font-bold">Menu</summary>
         <nav class="absolute right-0 top-12 w-52 bg-white rounded-2xl border shadow-soft p-4 flex flex-col gap-4 text-sm font-semibold z-50">
-          <a href="{{route('home')}}">Loja</a><a href="{{route('home',['categoria'=>'capas'])}}">Capas</a><a href="{{route('home',['categoria'=>'acessorios'])}}">Acessórios</a><a href="{{route('home',['categoria'=>'camaras'])}}">Câmaras</a>
+          <a href="{{route('home')}}">Loja</a><a href="{{route('home',['categoria'=>'capas'])}}">Capas</a><a href="{{route('home',['categoria'=>'acessorios'])}}">Acessórios</a><a href="{{route('home',['categoria'=>'camaras'])}}">Câmaras</a><a href="{{route('home',['categoria'=>'audio'])}}">Áudio</a><a href="{{route('home',['categoria'=>'gaming'])}}">Gaming</a><a href="{{route('repairs.index')}}">Reparações</a>
           @auth<a href="{{route('orders.index')}}">Encomendas</a>@if(auth()->user()->is_admin)<a href="{{route('admin.produtos.index')}}">Admin</a>@endif
           <form method="post" action="{{route('logout')}}">@csrf<button class="font-bold text-red-600">Sair</button></form>
           @else<a href="{{route('login')}}">Entrar</a><a href="{{route('register')}}">Criar conta</a>@endauth
         </nav>
       </details>
       @auth
-      <form method="post" action="{{route('logout')}}" class="hidden lg:block">@csrf<button class="text-sm text-muted hover:text-ink font-semibold">Sair</button></form>
+      <form method="post" action="{{route('logout')}}" class="hidden xl:block">@csrf<button class="text-sm text-muted hover:text-ink font-semibold">Sair</button></form>
       @endauth
     </div>
   </div>
@@ -75,7 +78,7 @@ html{scroll-behavior:smooth}body{font-family:'DM Sans',sans-serif}h1,h2,h3,h4{fo
 <footer class="bg-ink text-white mt-12">
  <div class="max-w-7xl mx-auto px-5 sm:px-8 py-12 grid gap-8 md:grid-cols-3">
   <div><div class="font-display font-extrabold text-2xl tracking-tight">nova<span class="text-flame">lens.</span></div><p class="text-slate-400 text-sm mt-4 max-w-xs leading-6">Tecnologia útil, design simples e escolhas que fazem sentido para ti.</p></div>
-  <div><p class="uppercase tracking-[.2em] font-bold text-xs text-slate-400 mb-4">Explorar</p><div class="flex flex-col gap-2 text-sm"><a href="{{route('home',['categoria'=>'capas'])}}" class="hover:text-flame">Capas</a><a href="{{route('home',['categoria'=>'acessorios'])}}" class="hover:text-flame">Acessórios</a><a href="{{route('home',['categoria'=>'camaras'])}}" class="hover:text-flame">Câmaras</a></div></div>
+  <div><p class="uppercase tracking-[.2em] font-bold text-xs text-slate-400 mb-4">Explorar</p><div class="flex flex-col gap-2 text-sm"><a href="{{route('home',['categoria'=>'capas'])}}" class="hover:text-flame">Capas</a><a href="{{route('home',['categoria'=>'acessorios'])}}" class="hover:text-flame">Acessórios</a><a href="{{route('home',['categoria'=>'camaras'])}}" class="hover:text-flame">Câmaras</a><a href="{{route('home',['categoria'=>'audio'])}}" class="hover:text-flame">Áudio</a><a href="{{route('home',['categoria'=>'gaming'])}}" class="hover:text-flame">Gaming</a><a href="{{route('repairs.index')}}" class="hover:text-flame">Reparações</a></div></div>
   <div><p class="uppercase tracking-[.2em] font-bold text-xs text-slate-400 mb-4">Informação</p><p class="text-sm text-slate-400 leading-6">Projeto académico desenvolvido em Laravel. Os produtos e as encomendas são demonstrativos; não existem pagamentos reais.</p></div>
  </div>
  <div class="border-t border-white/10 max-w-7xl mx-auto px-5 sm:px-8 py-5 text-xs text-slate-400 flex flex-wrap justify-between gap-2"><span>© {{date('Y')}} NovaLens Store</span><span>Desenvolvido para aprender. Pensado para impressionar.</span></div>
