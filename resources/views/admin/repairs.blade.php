@@ -1,0 +1,12 @@
+@extends('layouts.app')
+@section('title','Pedidos de reparação — NovaLens Admin')
+@section('content')
+<div class="flex flex-wrap items-center justify-between gap-4 mb-9"><div><p class="text-danger text-xs tracking-widest uppercase font-extrabold">Administração</p><h1 class="font-display font-extrabold text-4xl mt-2">Pedidos de reparação<span class="text-danger">.</span></h1><p class="text-muted mt-2 text-sm">Gerir pedidos de orçamento demonstrativos.</p></div><a class="btn-light" href="{{route('admin.produtos.index')}}">← Produtos</a></div>
+<div class="space-y-5">@forelse($repairs as $repair)
+<article class="bg-white rounded-[24px] border border-slate-100 p-6">
+<div class="flex flex-wrap items-start justify-between gap-4 mb-5"><div><p class="font-extrabold text-xs uppercase tracking-widest text-danger">Pedido #{{$repair->id}}</p><h2 class="font-display text-xl font-extrabold mt-1">{{$repair->brand_model}}</h2><p class="text-xs text-muted mt-2">{{$repair->created_at->format('d/m/Y H:i')}} · {{$repair->device_type}} · {{$repair->service_type}}</p></div><span class="bg-orange-50 text-danger font-bold text-xs rounded-full px-4 py-2">{{str_replace('_',' ',$repair->status)}}</span></div>
+<div class="grid md:grid-cols-2 gap-5 text-sm"><div><p class="font-bold">{{$repair->customer_name}}</p><p class="text-muted">{{$repair->email}} · {{$repair->phone}}</p><p class="mt-3 whitespace-pre-line">{{$repair->description}}</p></div>
+<form method="post" action="{{route('admin.repairs.update',$repair)}}" class="bg-slate-50 p-4 rounded-2xl">@csrf @method('PATCH')<label class="block text-sm font-bold mb-2" for="status-{{$repair->id}}">Estado</label><select id="status-{{$repair->id}}" name="status" class="field">@foreach(['recebido'=>'Recebido','em_analise'=>'Em análise','orcamento_enviado'=>'Orçamento enviado','em_reparacao'=>'Em reparação','concluido'=>'Concluído','cancelado'=>'Cancelado'] as $value=>$label)<option value="{{$value}}" @selected($repair->status===$value)>{{$label}}</option>@endforeach</select><button class="btn-dark mt-3 w-full">Guardar estado</button></form></div>
+</article>
+@empty<div class="bg-white rounded-[24px] p-12 text-center text-muted">Ainda não existem pedidos de reparação.</div>@endforelse</div><div class="mt-7">{{$repairs->links()}}</div>
+@endsection
